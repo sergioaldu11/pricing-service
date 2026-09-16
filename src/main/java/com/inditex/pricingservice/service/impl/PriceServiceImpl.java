@@ -10,9 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class PriceServiceImpl implements PriceService {
@@ -21,15 +19,10 @@ public class PriceServiceImpl implements PriceService {
     private PriceRepository priceRepository;
 
     public ResponseEntity<OutputDTO> findPrice(InputDTO inputDTO) {
-        List<Price> prices = priceRepository
-                .findByBrandIdAndProductIdAndStartDateBeforeAndEndDateAfterOrderByPriorityDesc(
-                        inputDTO.getBrandId(), inputDTO.getProductId(), inputDTO.getApplicationDate(), inputDTO.getApplicationDate());
+        Optional<Price> optionalPrice = priceRepository.findTopByBrandIdAndProductIdAndDate(
+                inputDTO.getBrandId(), inputDTO.getProductId(), inputDTO.getApplicationDate());
 
-        return prices.stream()
-                .max(Comparator.comparing(Price::getPriority)).flatMap(maxPriorityPrice -> prices.stream()
-                        .filter(price -> Objects.equals(price.getPriority(), maxPriorityPrice.getPriority()))
-                        .findFirst()
-                        .map(this::mapToOutputDTO))
+        return optionalPrice.map(this::mapToOutputDTO)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
     }
