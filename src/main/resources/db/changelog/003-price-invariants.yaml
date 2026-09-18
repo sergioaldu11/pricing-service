@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003
+      author: sergio
+      changes:
+        - sql:
+            sql: >-
+              ALTER TABLE prices ADD CONSTRAINT ck_prices_identifiers
+              CHECK (brand_id > 0 AND product_id > 0 AND price_list > 0);
+              ALTER TABLE prices ADD CONSTRAINT ck_prices_priority CHECK (priority >= 0);
+              ALTER TABLE prices ADD CONSTRAINT ck_prices_amount CHECK (price >= 0);
+              ALTER TABLE prices ADD CONSTRAINT ck_prices_dates CHECK (end_date >= start_date);
