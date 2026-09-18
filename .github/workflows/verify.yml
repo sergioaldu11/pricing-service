@@ -1,0 +1,48 @@
+name: Verify pricing service
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            maven: bash ./mvnw
+          - os: windows-latest
+            maven: .\mvnw.cmd
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6
+        with:
+          distribution: oracle
+          java-version: '27'
+          cache: maven
+      - name: Formatting, unit, integration, architecture, coverage and mutation gates
+        run: ${{ matrix.maven }} -B -ntp clean verify -Pmutation
+      - name: Test evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: test-evidence-${{ matrix.os }}
+          retention-days: 14
+          path: |
+            **/target/surefire-reports/*
+            **/target/failsafe-reports/*
+            **/target/pit-reports/**
+            **/target/site/jacoco/**
+            target/site/jacoco/**
+            target/packaged-application.log

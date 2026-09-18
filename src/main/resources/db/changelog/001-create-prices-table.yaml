@@ -1,0 +1,78 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001
+      author: sergio
+      changes:
+        - createTable:
+            tableName: prices
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: brand_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: product_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: price_list
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: priority
+                  type: int
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: start_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: end_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: price
+                  type: "decimal(10,2)"
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: curr
+                  type: varchar(3)
+                  constraints:
+                    nullable: false
+
+        - createIndex:
+            tableName: prices
+            indexName: idx_prices_lookup
+            columns:
+              - column:
+                  name: brand_id
+              - column:
+                  name: product_id
+              - column:
+                  name: start_date
+              - column:
+                  name: end_date
+              - column:
+                  name: priority

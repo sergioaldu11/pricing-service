@@ -1,0 +1,52 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002
+      author: sergio
+      changes:
+        - insert:
+            tableName: prices
+            columns:
+              - column: { name: brand_id, valueNumeric: 1 }
+              - column: { name: product_id, valueNumeric: 35455 }
+              - column: { name: price_list, valueNumeric: 1 }
+              - column: { name: priority, valueNumeric: 0 }
+              - column: { name: start_date, valueDate: "2020-06-14T00:00:00" }
+              - column: { name: end_date, valueDate: "2020-12-31T23:59:59" }
+              - column: { name: price, valueNumeric: 35.50 }
+              - column: { name: curr, value: "EUR" }
+
+        - insert:
+            tableName: prices
+            columns:
+              - column: { name: brand_id, valueNumeric: 1 }
+              - column: { name: product_id, valueNumeric: 35455 }
+              - column: { name: price_list, valueNumeric: 2 }
+              - column: { name: priority, valueNumeric: 1 }
+              - column: { name: start_date, valueDate: "2020-06-14T15:00:00" }
+              - column: { name: end_date, valueDate: "2020-06-14T18:30:00" }
+              - column: { name: price, valueNumeric: 25.45 }
+              - column: { name: curr, value: "EUR" }
+
+        - insert:
+            tableName: prices
+            columns:
+              - column: { name: brand_id, valueNumeric: 1 }
+              - column: { name: product_id, valueNumeric: 35455 }
+              - column: { name: price_list, valueNumeric: 3 }
+              - column: { name: priority, valueNumeric: 1 }
+              - column: { name: start_date, valueDate: "2020-06-15T00:00:00" }
+              - column: { name: end_date, valueDate: "2020-06-15T11:00:00" }
+              - column: { name: price, valueNumeric: 30.50 }
+              - column: { name: curr, value: "EUR" }
+
+        - insert:
+            tableName: prices
+            columns:
+              - column: { name: brand_id, valueNumeric: 1 }
+              - column: { name: product_id, valueNumeric: 35455 }
+              - column: { name: price_list, valueNumeric: 4 }
+              - column: { name: priority, valueNumeric: 1 }
+              - column: { name: start_date, valueDate: "2020-06-15T16:00:00" }
+              - column: { name: end_date, valueDate: "2020-12-31T23:59:59" }
+              - column: { name: price, valueNumeric: 38.95 }
+              - column: { name: curr, value: "EUR" }

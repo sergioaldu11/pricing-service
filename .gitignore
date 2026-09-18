@@ -1,0 +1,20 @@
+HELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+.idea
+*.iws
+*.iml
+*.ipr
+
+# Local review material and toolchains are not part of the delivery.
+/.tools/
+/tmp/
+/.delivery-pricing-service/
+/.delivery-redate.sh
+/pricing-service-before-redating.bundle
+/pricing-service-date-changes.csv
+/Sergio_Alvarez_Duran_CV.pdf
+/Prueba técnica_Inditex.txt
