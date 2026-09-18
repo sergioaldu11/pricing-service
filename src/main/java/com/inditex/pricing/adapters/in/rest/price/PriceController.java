@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/prices")
+@RequestMapping({"/api/v1/prices", "/api/prices"})
 public class PriceController {
 
     private final GetApplicablePriceUseCase useCase;

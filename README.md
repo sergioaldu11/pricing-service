@@ -26,11 +26,13 @@ La aplicación usa H2 en memoria y carga los datos del enunciado mediante Liquib
 
 ## API
 
-`GET /api/prices?applicationDate=2020-06-14T16:00:00&productId=35455&brandId=1`
+`GET /api/v1/prices?applicationDate=2020-06-14T16:00:00&productId=35455&brandId=1`
 
 La fecha se interpreta como `LocalDateTime` ISO sin zona. La vigencia es inclusiva; se elige la mayor prioridad y, en empate, el inicio más reciente y el identificador más bajo como desempate determinista.
 
 Las respuestas de error siguen RFC 9457 (`application/problem+json`) e incluyen códigos estables como `PRICE_NOT_FOUND`, `HTTP_400`, `HTTP_405` e `INTERNAL_ERROR`. Los errores inesperados generan además un `errorId` y la cabecera `X-Error-Id` para correlación sin exponer detalles internos.
+
+En producción se activa `PRICING_SECURITY_ENABLED=true` y se configura `PRICING_SECURITY_ISSUER_URI` junto con `PRICING_SECURITY_AUDIENCE`. El endpoint exige un JWT Bearer con el scope `pricing.read`; `/actuator/health` queda disponible para las comprobaciones de la plataforma. En local la seguridad permanece desactivada para facilitar la ejecución de la prueba.
 
 ## Estructura hexagonal
 
