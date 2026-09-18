@@ -1,7 +1,0 @@
-databaseChangeLog:
-  - include:
-      file: 001-create-prices-table.yaml
-      relativeToChangelogFile: true
-  - include:
-      file: 002-insert-sample-prices.yaml
-      relativeToChangelogFile: true
