@@ -18,6 +18,7 @@ public class PriceServiceImpl implements PriceService {
 
     public ResponseEntity<OutputDTO> findPrice(InputDTO inputDTO) {
         //llamada al priceRepository
+        //llamada al priceRepository
         return priceRepository.findTopByBrandIdAndProductIdAndDate(
                         inputDTO.getBrandId(), inputDTO.getProductId(), inputDTO.getApplicationDate())
                 .map(price -> ResponseEntity.ok(mapToOutputDTO(price)))
